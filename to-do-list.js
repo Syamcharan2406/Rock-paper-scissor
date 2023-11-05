@@ -4,7 +4,26 @@ const todoList = [];
 
 function displayTodo() { // to display on page
     let todoListHtml = ''
+    todoList.forEach(function(todoObject,index){
+        const {name,date} = todoObject;
+        if (!name && !date) {
+        let html =''
+       } else {
+        let html = `
+        <div>${name}</div>
+        <div>${date}</div>
+        <button class="delete-button" onclick="
+                todoList.splice(${index},1);
+                displayTodo();
+        ">Delete</button>
+        `;
     
+        todoListHtml += html;
+    }
+
+    });
+
+    /*
     for (let i = 0; i < todoList.length; i++) {  
         const todoObject = todoList[i];
         //const name = todoObject.name;
@@ -25,7 +44,7 @@ function displayTodo() { // to display on page
         todoListHtml += html;
        }
             
-        }
+        }*/
         document.querySelector('.display-todo').innerHTML = todoListHtml;
     }
     

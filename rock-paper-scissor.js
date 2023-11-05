@@ -11,6 +11,22 @@ function displayScore() {
     
 }
 
+function pickcomputerMove() {
+    const randomNumber = Math.random();
+    let computerMove = '';
+
+    if (randomNumber >= 0 && randomNumber < 1/3){
+        computerMove = 'rock';
+    } else if (randomNumber >= 1/3 && randomNumber < 2/3){
+        computerMove = 'paper';
+    } else  { // randomNumber >= 2/3 && < 1
+        computerMove = 'scissors';
+    }
+    
+    return computerMove;
+}
+
+
     
 
 
@@ -19,6 +35,7 @@ function reset() {
     score.losses = 0,
     score.tie = 0 ,
     localStorage.removeItem('score');
+    displayScore();
     
 }
 
@@ -72,19 +89,25 @@ finalResult = result;
     
     document.querySelector('.picks')
     .innerHTML = `you pick <img class="move-img" src="images/${playerMove}-emoji.png" alt="">  computer pick<img class="move-img" src="images/${computerMove}-emoji.png" alt="">`;
+    displayScore();
 }
 
-function pickcomputerMove() {
-    const randomNumber = Math.random();
-    let computerMove = '';
 
-    if (randomNumber >= 0 && randomNumber < 1/3){
-        computerMove = 'rock';
-    } else if (randomNumber >= 1/3 && randomNumber < 2/3){
-        computerMove = 'paper';
-    } else  { // randomNumber >= 2/3 && < 1
-        computerMove = 'scissors';
+let isAutoPlaying = false;
+let intervalId;
+
+function autoPlay(){
+    if (!isAutoPlaying){
+        intervalId = setInterval(function() {
+            const playerMove = pickcomputerMove();
+            playGame(playerMove);
+        },1000)
+        isAutoPlaying = true;
+    } else{
+        clearInterval(intervalId);
+        isAutoPlaying = false;
     }
 
-    return computerMove;
+    
+    
 }

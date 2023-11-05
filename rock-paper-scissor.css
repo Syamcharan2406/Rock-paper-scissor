@@ -28,6 +28,6 @@ body{
     margin-bottom: 40px;
 }
 
-.reset-button{
+.reset-button,.auto-play-button{
     padding: 8px;
 }
